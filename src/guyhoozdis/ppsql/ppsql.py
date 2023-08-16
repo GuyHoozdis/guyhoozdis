@@ -1,4 +1,5 @@
 import sys
+
 try:
     import sqlparse
 except ImportError:
@@ -17,12 +18,12 @@ def ppsql(query, chartype=str, file=sys.stdout, **overrides):
         print("Requires sqlparse module to be installed.", file=sys.stderr)
         return
 
-    options = dict(reindent=True, keyword_case='upper')
+    options = dict(reindent=True, keyword_case="upper")
     options.update(**overrides)
     try:
         # TODO: Come back and support both Selectable and Query object
-        #statement = query.statement.compile(compile_kwargs={'literal_binds': True})
-        statement = query.compile(compile_kwargs={'literal_binds': True})
+        # statement = query.statement.compile(compile_kwargs={'literal_binds': True})
+        statement = query.compile(compile_kwargs={"literal_binds": True})
         formatted_statement = sqlparse.format(chartype(statement), **options)
     except Exception as ex:
         msg = "Failed to bind literals; "
