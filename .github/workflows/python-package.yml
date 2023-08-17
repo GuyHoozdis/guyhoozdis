@@ -21,9 +21,10 @@ jobs:
                 python-version: ["3.9", "3.10", "3.11"]
 
         steps:
-        - run: |
+        - name: Job Environment
+          run: |
             echo "Platform OS: ${{ runner.os }}"
-            echo "Platform architecture: ${{ runner.architecture }}"
+            echo "Platform architecture: ${{ runner.arch }}"
         - uses: actions/checkout@v3
         - name: Set up Python ${{ matrix.python-version }}
           uses: actions/setup-python@v3
