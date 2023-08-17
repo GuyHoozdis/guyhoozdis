@@ -30,12 +30,12 @@ jobs:
         - name: Install dependencies
           run: |
             python -m pip install --upgrade pip
-            python -m pip install pytest pre-commit
-            pre-commit install-hooks
-            poetry install --no-root --sync
+            python -m pip install poetry
+            poetry install --no-root --sync --with=test
+            poetry run pre-commit install-hooks
         - name: Code quality checks
           run: |
-            pre-commit run -a
+            poetry run pre-commit run -a
         - name: Run test suite
           run: |
-            pytest tests
+            poetry run pytest tests
