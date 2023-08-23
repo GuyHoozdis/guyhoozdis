@@ -14,7 +14,9 @@ The workflows are looking good, but not totally done.
 - [Running tox in GH Actions](https://github.com/ymyzk/tox-gh-actions)
 - [fail-fast](https://www.edwardthomson.com/blog/github_actions_6_fail_fast_matrix_workflows.html)
 - [GH Action variables][gh-action-vars]
+- [Advanced usage of the setup-python action][caching-packages]
 
 [linux-error]: https://github.com/GuyHoozdis/guyhoozdis/actions/runs/5894264270/job/15987536147
 [windows-error]: https://github.com/GuyHoozdis/guyhoozdis/actions/runs/5894264270/job/15987536908
 [gh-action-vars]: https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+[caching-packages]: https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md#caching-packages
