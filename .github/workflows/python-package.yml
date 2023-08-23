@@ -6,8 +6,12 @@ name: Python Package Code Quality
 run-name: ${{ github.actor }} is running the code quality checks on ${{ github.ref_type }} ${{ github.ref_name }}.
 
 on:
-  - push
   - pull_request
+  - push
+
+concurrency:
+  group: ${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
     build:
