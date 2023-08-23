@@ -1,7 +1,15 @@
 # 2023-08-22
 
 The [linux and macos workflows](https://github.com/GuyHoozdis/guyhoozdis/actions/runs/5945646219)
-are working as expected.  The windows workflows are still failing on mixed line endings.
+are working as expected.  -The windows workflows are still failing on mixed line endings.-
+
+I added a .gitattributes file that was probably a little overkill.  I think forcing the python
+extensions to `lf` is what did it, but it might have been the catch-all rule added at the very end.
+I'll have to come back and experiment some more to figure out what is minimally needed.
+
+All the workflows are now working as expected.  Everything sets up and runs correctly.  The tests
+fail, but they are expected to do that.  Implementing the tests and writing some actual source code
+for the package is the next step.
 
 
 # 2023-08-16
