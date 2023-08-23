@@ -6,7 +6,6 @@ name: Python Package Code Quality
 run-name: ${{ github.actor }} is running the code quality checks on ${{ github.ref_type }} ${{ github.ref_name }}.
 
 on:
-  - pull_request
   - push
 
 concurrency:
