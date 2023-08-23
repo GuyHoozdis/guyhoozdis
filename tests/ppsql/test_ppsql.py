@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.mark.xfail(strict=True, reason="Not yet implemented.")
 def test_ppsql_requires_sqlparse():
     assert False
