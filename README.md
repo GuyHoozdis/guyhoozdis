@@ -1,3 +1,11 @@
+# 2023-08-22
+
+The [linux and macos workflows](https://github.com/GuyHoozdis/guyhoozdis/actions/runs/5945646219)
+are working as expected.  The windows workflows are still failing on mixed line endings.
+
+
+# 2023-08-16
+
 The workflows are looking good, but not totally done.
 - The macos env runs the test suite and fails as expected.
 - The macos env is the only one that correctly sets up and runs everything.
