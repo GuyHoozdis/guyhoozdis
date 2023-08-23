@@ -11,6 +11,10 @@ All the workflows are now working as expected.  Everything sets up and runs corr
 fail, but they are expected to do that.  Implementing the tests and writing some actual source code
 for the package is the next step.
 
+TODO: I created a [PR](https://github.com/GuyHoozdis/guyhoozdis/pull/1), but merging is blocked
+because the tests are failing.  I can change the `assert False` to `assert True` and then complete
+the PR process.
+
 
 # 2023-08-16
 
