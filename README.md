@@ -2,7 +2,7 @@ The workflows are looking good, but not totally done.
 - The macos env runs the test suite and fails as expected.
 - The macos env is the only one that correctly sets up and runs everything.
 - The windows env fails [due to mixed line endings][windows-error].
-  - I wonder if this is being caused by the checkout.  
+  - I wonder if this is being caused by the checkout.
   - There is a git config setting that will correct this.  Go look that up.
 - The linux 3.9 environment is working as expected - like the macos environments.
   - The [3.10 and 3.11 linux environments][linux-error] are not working.  They are failing to
