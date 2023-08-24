@@ -3,12 +3,19 @@ from __future__ import annotations
 import pytest
 
 from collections import namedtuple
+from collections.abc import Generator
+from contextlib import contextmanager
 from enum import Enum
 from typing import Optional
 
 from sqlalchemy import create_engine
 from sqlalchemy import Column, ForeignKey, String, Table
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship
+
+
+@contextmanager
+def does_not_raise() -> Generator[None, None, None]:
+    yield
 
 
 class Base(DeclarativeBase):

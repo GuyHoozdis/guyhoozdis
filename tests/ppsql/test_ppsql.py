@@ -1,10 +1,11 @@
 import pytest
 
 from sqlalchemy import select
+from sqlalchemy.orm import Query
 
 from guyhoozdis.ppsql import ppsql
 
-from .conftest import Parent, Child, Address, User
+from .conftest import Address, User, does_not_raise
 
 
 # XXX: Not actually needed.  I was just playing around.
@@ -25,45 +26,46 @@ def test_ppsql_requires_sqlparse():
     assert False
 
 
-@pytest.mark.xfail(strict=True, reason="Not yet implemented.")
 def test_ppsql_formats_sql_as_string():
-    assert False
+    param_value = "Kourtni"
+    stmt = (
+        "SELECT users.user_id, users.name, users.fullname "
+        "FROM users JOIN addresses ON users.user_id = addresses.user_id "
+        f"WHERE users.name = {param_value}"
+    )
+
+    with does_not_raise():
+        output = ppsql(stmt)
+
+    assert output
+    assert param_value in output
 
 
-@pytest.mark.xfail(strict=True, reason="Not yet implemented.")
 def test_ppsql_formats_sqlalchemy_seletable():
+    param_value = "Kourtni"
     stmt = (
         select(User)
         .join(Address)
-        .where(User.name == 'Kourtni')
+        .where(User.name == param_value)
     )
 
-    # !!!: The way I wrote ppsql it will write to stdout.  I probably want a wrapper that does that
-    # and right here I'd be testing the logic that takes a Select-able, renders arguments, and returns
-    # a string.
-    assert False
+    with does_not_raise():
+        output = ppsql(stmt)
+
+    assert output
+    assert param_value in output
 
 
-def test_sully(family, session):
-    # Start this with...
-    # $ poetry run pytest --pdbcls=IPython.terminal.debugger:TerminalPdb tests/ppsql/test_ppsql.py::test_sully
-    # ... and you'll get exactly what
-    #
-    # The test body is dumb.  It is just to demonstrate the fixtures being used.
-
+def test_ppsql_formats_sqlalchemy_query():
+    param_value = "Kourtni"
     stmt = (
-        select(User)
+        Query(User)
         .join(Address)
-        .where(User.name == 'Kourtni')
+        .where(User.name == param_value)
     )
-    breakpoint()
-    # dad, mom, children = family
-    # dad.children = children
-    # mom.children = children
-    # session.add_all([dad, mom] + [c for c in children])
-    # session.commit()
 
-    # kourtni, jacob, lauren = children
-    # assert kourtni in dad.children
-    # assert mom in kourtni.parents
-    assert False
+    with does_not_raise():
+        output = ppsql(stmt)
+
+    assert output
+    assert param_value in output
