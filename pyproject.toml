@@ -8,6 +8,7 @@ packages = [{include = "guyhoozdis", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+sqlparse = "^0.4.4"
 
 
 [tool.poetry.group.test.dependencies]
