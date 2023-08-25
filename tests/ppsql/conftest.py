@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-import pytest
-
 from collections import namedtuple
 from collections.abc import Generator
 from contextlib import contextmanager
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy import create_engine
-from sqlalchemy import Column, ForeignKey, String, Table
+import pytest
+from sqlalchemy import Column, ForeignKey, String, Table, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship
 
 
@@ -19,7 +17,6 @@ def does_not_raise() -> Generator[None, None, None]:
 
 
 class Base(DeclarativeBase):
-
     def __repr__(self) -> str:
         return f"{self.name} ({self.__class__.__name__}, age={self.age})"
 
@@ -47,7 +44,9 @@ class Parent(Base):
     age: Mapped[int]
     role: Mapped[ParentRole]
 
-    children: Mapped[list[Child]] = relationship(secondary=association_table, back_populates="parents")
+    children: Mapped[list[Child]] = relationship(
+        secondary=association_table, back_populates="parents"
+    )
 
 
 class Child(Base):
@@ -56,7 +55,9 @@ class Child(Base):
     child_id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     age: Mapped[int]
-    parents: Mapped[list[Parent]] = relationship(secondary=association_table, back_populates="children")
+    parents: Mapped[list[Parent]] = relationship(
+        secondary=association_table, back_populates="children"
+    )
 
 
 class User(Base):
@@ -71,7 +72,9 @@ class User(Base):
     )
 
     def __repr__(self) -> str:
-        return f"User(id={self.user_id!r}, name={self.name!r}, fullname={self.fullname!r})"
+        return (
+            f"User(id={self.user_id!r}, name={self.name!r}, fullname={self.fullname!r})"
+        )
 
 
 class Address(Base):
@@ -81,7 +84,7 @@ class Address(Base):
     email_address: Mapped[str]
     user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
 
-    user: Mapped["User"] = relationship(back_populates="addresses")
+    user: Mapped[User] = relationship(back_populates="addresses")
 
     def __repr__(self) -> str:
         return f"Address(id={self.address_id!r}, email_address={self.email_address!r})"
@@ -112,6 +115,6 @@ def family():
         Child(name="Jacob", age=18),
         Child(name="Lauren", age=16),
     ]
-    yield namedtuple("Family", ['dad', 'mom', 'children'])(
+    yield namedtuple("Family", ["dad", "mom", "children"])(
         dad=dad, mom=mom, children=children
     )

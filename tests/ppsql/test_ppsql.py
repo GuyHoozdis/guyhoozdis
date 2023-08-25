@@ -1,12 +1,10 @@
 import pytest
-
 from sqlalchemy import select
 from sqlalchemy.orm import Query
 
 from guyhoozdis.ppsql import ppsql
 
 from .conftest import Address, User, does_not_raise
-
 
 # XXX: Not actually needed.  I was just playing around.
 # @pytest.fixture(autouse=True)
@@ -43,11 +41,7 @@ def test_ppsql_formats_sql_as_string():
 
 def test_ppsql_formats_sqlalchemy_seletable():
     param_value = "Kourtni"
-    stmt = (
-        select(User)
-        .join(Address)
-        .where(User.name == param_value)
-    )
+    stmt = select(User).join(Address).where(User.name == param_value)
 
     with does_not_raise():
         output = ppsql(stmt)
@@ -58,11 +52,7 @@ def test_ppsql_formats_sqlalchemy_seletable():
 
 def test_ppsql_formats_sqlalchemy_query():
     param_value = "Kourtni"
-    stmt = (
-        Query(User)
-        .join(Address)
-        .where(User.name == param_value)
-    )
+    stmt = Query(User).join(Address).where(User.name == param_value)
 
     with does_not_raise():
         output = ppsql(stmt)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import sys
-
 from typing import Any, AnyStr
 
 from sqlalchemy import Selectable
@@ -41,6 +40,7 @@ except ImportError:
 #
 #################################################################################
 
+
 def ppsql(query: Selectable | Query | AnyStr, encoding=None, **overrides: Any) -> str:
     """Pretty print SQL statements.
 
@@ -55,7 +55,12 @@ def ppsql(query: Selectable | Query | AnyStr, encoding=None, **overrides: Any) -
         raise TypeError(f"Cannot process query of type {query_type}.")
 
     # Combine defaults with overrides to get the requested options.
-    options = dict(reindent=True, keyword_case="upper", indent_columns=True, indent_after_first=True)
+    options = dict(
+        reindent=True,
+        keyword_case="upper",
+        indent_columns=True,
+        indent_after_first=True,
+    )
     options.update(**overrides)
 
     if isinstance(query, Query):
@@ -72,7 +77,9 @@ def ppsql(query: Selectable | Query | AnyStr, encoding=None, **overrides: Any) -
     return formatted_statement
 
 
-def cli(query: Selectable | AnyStr, encoding=None, file=sys.stdout, **overrides) -> None:
+def cli(
+    query: Selectable | AnyStr, encoding=None, file=sys.stdout, **overrides
+) -> None:
     """Pretty print SQL statements.
 
     query       - A string of SQL or SQLAlchemy Selectable object
