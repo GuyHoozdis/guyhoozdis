@@ -1,3 +1,7 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "guyhoozdis"
 version = "0.1.0"
@@ -21,6 +25,9 @@ pre-commit = "^3.3.3"
 ipython = "^8.14.0"
 ipdb = "^0.13.13"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+# Let the other tools manage line length
+ignore = ["E501"]
